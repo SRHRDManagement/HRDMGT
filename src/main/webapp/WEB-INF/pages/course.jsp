@@ -15,7 +15,7 @@
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 class="page-title">Generation</h4>
+                        <h4 class="page-title">COURSES</h4>
                         <ol class="breadcrumb">
                             <li><a href="#">Study Management</a></li>
                             <li class="active">Course</li>
