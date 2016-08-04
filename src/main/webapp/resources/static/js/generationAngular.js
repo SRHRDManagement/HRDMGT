@@ -61,7 +61,7 @@ genApp.controller("generationCtr", function($scope, $http, sweet) {
             	swal("Cancelled", "You not change the state of Generation :)", "error");
             	return false;
             }
-    		var disableGen={'GENID':id, 'GENIDFINISH':true};
+    		var disableGen={'GENID':id, 'GENISFINISH':true};
             $http.put("http://localhost:8081/api/generation/"+id, disableGen).success(function(response) {
             	swal("SUCCESSFUL", "You change state of generation successfully! ", "success");
     			$scope.getGeneration();	
