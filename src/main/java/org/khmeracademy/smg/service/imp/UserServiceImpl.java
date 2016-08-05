@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 				role.setRol_name((String) datas.get("NAME"));
 				roles.add(role);
 			}
-			System.out.println(dataRole);
+			System.out.println("My role, "+dataRole);
 			u.setRoles(roles);
 			
 			System.out.println(map);

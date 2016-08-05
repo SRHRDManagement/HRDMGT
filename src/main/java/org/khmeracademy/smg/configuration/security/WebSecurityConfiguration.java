@@ -1,5 +1,7 @@
 package org.khmeracademy.smg.configuration.security;
 
+import org.khmeracademy.smg.configuration.security.AjaxAuthenticationFailureHandler;
+import org.khmeracademy.smg.configuration.security.AjaxAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +19,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Qualifier(value="CustomUserDetailService")
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
+	@Qualifier(value="ajaxAuthenticationSuccessHandler")
+	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+	
+	@Autowired
+	@Qualifier(value="ajaxAuthenticationFailureHandler")
+	private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
 	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService);
+		auth.userDetailsService(userDetailsService);//65586103
 		//auth.inMemoryAuthentication().withUser("vansapha@gmail.com").password("007vansa").roles("ADMIN");
 	}
 	
@@ -28,13 +37,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/home/**", "/generation/**").hasRole("ADMIN");
+			.antMatchers("/home").hasRole("ADMIN");
 		http
 			.formLogin()
 			.loginPage("/login")
 			.usernameParameter("usr_email")
 			.passwordParameter("usr_password")
-			.permitAll();
+			.permitAll()
+			.failureHandler(ajaxAuthenticationFailureHandler)
+			.successHandler(ajaxAuthenticationSuccessHandler);
 		http
 		.logout()
 		.logoutUrl("/logout")

@@ -95,7 +95,10 @@
 
         <script src="${pageContext.request.contextPath}/resources/static/js/jquery.core.js"></script>
         <script src="${pageContext.request.contextPath}/resources/static/js/jquery.app.js"></script>
-         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        
+        
+        
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript">
         
         $(function() {
@@ -105,7 +108,7 @@
        		  e.preventDefault();
        			
        		  $.ajax({
-  	            url: ${pageContext.request.contextPath}"/login",
+  	            url: "${pageContext.request.contextPath}/login",
   	            type: "POST",
   	            data: $("#frmLogin").serialize(),
 //   	            beforeSend: function (xhr) {
@@ -122,6 +125,7 @@
   	            	}else{
   	            		alert("Logined success.vansa");
   	            		location.href = "${pageContext.request.contextPath}/"+ data;
+  	            		console.log("${pageContext.request.contextPath}/"+ data);
   	            	}
   	            	
   	            },
